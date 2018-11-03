@@ -1,7 +1,7 @@
 Arduino-LMIC library
 ====================
 
-This version of the Arduino-LMIC libraries have been modified for use on New Zealand frequencies only.
+This version of the Arduino-LMIC libraries have been modified for use on New Zealand frequencies. In this library the au921 files have been modified. This is work in progress and not all functions have been tested.
 
 This repository contains the IBM LMIC (LoraMAC-in-C) library, slightly modified to run in the Arduino environment, allowing using the SX1272, SX1276 transceivers and compatible modules (such as some HopeRF RFM9x modules and the Murata LoRa modules).
 
@@ -48,10 +48,7 @@ This library requires Arduino IDE version 1.6.6 or above, since it requires C99 
 	- [RXTX](#rxtx)
 	- [RXTX Polarity](#rxtx-polarity)
 	- [Pin mapping](#pin-mapping)
-		- [Adafruit Feather M0 LoRa](#adafruit-feather-m0-lora)
-		- [LoRa Nexus by Ideetron](#lora-nexus-by-ideetron)
-		- [MCCI Catena 4450/4460](#mcci-catena-44504460)
-		- [MCCI Catena 4551](#mcci-catena-4551)
+		- [Uno with Arduino Compatible Long Range LoRa Shield v1](#uno-dragino-lora-shield-v1)
 - [Example Sketches](#example-sketches)
 - [Timing](#timing)
 - [Downlink datarate](#downlink-datarate)
@@ -324,10 +321,7 @@ The configuration entry `lmic_pinmap::rxtx_rx_active` should be set to the state
 
 > For pre-configured boards, refer to the documentation on your board for the required settings. See the following:
 >
-> - [Adafruit Feather M0 LoRa](#adafruit-feather-m0-lora)
-> - [LoRa Nexus by Ideetron](#lora-nexus-by-ideetron)
-> - [MCCI Catena 4450/4460](#mcci-catena-44504460)
-> - [MCCI Catena 4551](#mcci-catena-4551)
+> - [Uno with Arduino Compatible Long Range LoRa Shield v1](#uno-dragino-lora-shield-v1)
 
 If you don't have the board documentation, you need to provide your own `lmic_pinmap` values. As described above, a variety of configurations are possible. To tell the LMIC library how your board is configured, a pin mapping struct is used in the sketch file.
 
@@ -351,67 +345,16 @@ potentially left out (depending on the environments and requirements, see the no
 
 The name of this struct must always be `lmic_pins`, which is a special name recognized by the library.
 
-#### Adafruit Feather M0 LoRa
+#### Uno with Arduino Compatible Long Range LoRa Shield v1
 
-See [Feather M0 LoRa](https://www.adafruit.com/product/3178).
-This board uses the following pin mapping, as shown in the various "...-feather" sketches.
-
-DIO0 is hard-wired by Adafruit to Arduino D3, but DIO1 is not connected to any Arduino pin (it comes to JP1 pin 1, but is not otherwise connected). This pin table assumes that you have manually wired JP1 pin 1 to Arduino JP3 pin 9 (Arduino D6).
-
-DIO2 is not connected.
+See [Arduino Compatible Long Range LoRa Shield](https://www.jaycar.com.au/arduino-compatible-long-range-lora-shield/p/XC4392).
 
 ```c++
 const lmic_pinmap lmic_pins = {
-    .nss = 8,
+    .nss = 10,
     .rxtx = LMIC_UNUSED_PIN,
-    .rst = 4,
-    .dio = {3, 6, LMIC_UNUSED_PIN},
-};
-```
-
-#### LoRa Nexus by Ideetron
-
-This board uses the following pin mapping:
-
-```c++
-  const lmic_pinmap lmic_pins = {
-      .nss = 10,
-      .rxtx = LMIC_UNUSED_PIN,
-      .rst = LMIC_UNUSED_PIN, // hardwired to AtMega RESET
-      .dio = {4, 5, 7},
-  };
-```
-
-#### MCCI Catena 4450/4460
-
-See [MCCI Catena 4450](https://store.mcci.com/collections/lorawan-iot-and-the-things-network/products/catena-4450-lorawan-iot-device) and [MCCI Catena 4460](https://store.mcci.com/collections/lorawan-iot-and-the-things-network/products/catena-4460-sensor-wing-w-bme680).
-
-These modules are based on the [Feather M0 LoRa](https://www.adafruit.com/product/3178). Since they include an extra Feather wing for the sensors, the Feather wing includes the trace connecting DIO1 to Arduino D6. No user wiring is needed on the Feather M0.
-
-```c++
-const lmic_pinmap lmic_pins = {
-    .nss = 8,
-    .rxtx = LMIC_UNUSED_PIN,
-    .rst = 4,
-    .dio = {3, 6, LMIC_UNUSED_PIN},
-};
-```
-
-#### MCCI Catena 4551
-
-See [MCCI Catena 4551](https://store.mcci.com/collections/lorawan-iot-and-the-things-network/products/catena-4551-integrated-lorawan-node).
-This board uses a Murata LoRa module and has the following pin mapping:
-
-```c++
-const lmic_pinmap lmic_pins = {
-    .nss = 7,
-    .rxtx = 29,
-    .rst = 8,
-    .dio = {25, 26, 27},
-    // the Murata module needs D29 high for RX, low for TX.
-    .rxtx_rx_active = 1,
-    // the Murata module is direct-wired, we can use 8 MHz for SPI.
-    .spi_freq = 8000000
+    .rst = 9,
+    .dio = {2, 6, 7},
 };
 ```
 
