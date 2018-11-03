@@ -1,6 +1,8 @@
 Arduino-LMIC library
 ====================
 
+This version of the Arduino-LMIC libraries have been modified for use on New Zealand frequencies only.
+
 This repository contains the IBM LMIC (LoraMAC-in-C) library, slightly modified to run in the Arduino environment, allowing using the SX1272, SX1276 transceivers and compatible modules (such as some HopeRF RFM9x modules and the Murata LoRa modules).
 
 This library mostly exposes the functions defined by LMIC, it makes no attempt to wrap them in a higher level API that is more in the Arduino style. To find out how to use the library itself, see the examples, or see the PDF file in the doc subdirectory.
@@ -8,8 +10,6 @@ This library mostly exposes the functions defined by LMIC, it makes no attempt t
 The [MCCI arduino-lorawan](https://github.com/mcci-catena/arduino-lorawan) library provides a higher level, more Arduino-like wrapper which may be useful.
 
 This library requires Arduino IDE version 1.6.6 or above, since it requires C99 mode to be enabled by default.
-
-[![GitHub release](https://img.shields.io/github/release/mcci-catena/arduino-lmic.svg)](https://github.com/mcci-catena/arduino-lmic/releases/latest) [![GitHub commits](https://img.shields.io/github/commits-since/mcci-catena/arduino-lmic/latest.svg)](https://github.com/mcci-catena/arduino-lmic/compare/V2.1.5...master) [![Build Status](https://travis-ci.org/mcci-catena/arduino-lmic.svg?branch=master)](https://travis-ci.org/mcci-catena/arduino-lmic)
 
 **Contents:**
 
@@ -23,7 +23,6 @@ This library requires Arduino IDE version 1.6.6 or above, since it requires C99 
 - [Features](#features)
 - [Configuration](#configuration)
 	- [Selecting the LoRaWAN Region Configuration](#selecting-the-lorawan-region-configuration)
-		- [eu868, as923, in866](#eu868-as923-in866)
 		- [us915, au921, nz915](#us915-au921)
 	- [Selecting the target radio transceiver](#selecting-the-target-radio-transceiver)
 	- [Controlling use of interrupts](#controlling-use-of-interrupts)
@@ -115,20 +114,9 @@ The library supports the following regions:
 
 `-D` variable | CFG region name | CFG region value | LoRa Spec Reference| Frequency
 ------------|-----------------|:----------------:|:-------------------:|--------
-`-D CFG_eu868` | `LMIC_REGION_eu868` | 1 | 2.1 | EU 863-870 MHz ISM
-`-D CFG_us915` | `LMIC_REGION_us915` | 2 | 2.2 | US 902-928 MHz ISM
 `-D CFG_au921` | `LMIC_REGION_au921` | 5 | 2.5 | Australia 915-928 MHz ISM
-`-D CFG_as923` | `LMIC_REGION_as923` | 7 | 2.7 | Asia 923 MHz ISM
-`-D CFG_in866` | `LMIC_REGION_in866` | 9 | 2.9 | India 865-867 MHz ISM
-`-D CFG_nz915` | `LMIC_REGION_nz915` | 10| ?.? | New Zealand 915-928 MHz ISM
 
 You should define exactly one of `CFG_...` variables. If you don't, the library assumes `CFG_eu868`. The library changes configuration pretty substantially according to the region. Some of the differences are listed below.
-
-#### eu868, as923, in866
-
-If the library is configured for EU868, AS923, or IN866 operation, we make the following changes:
-- Add the API `LMIC_setupBand()`.
-- Add the constants `MAX_CHANNELS`, `MAX_BANDS`, `LIMIT_CHANNELS`, `BAND_MILLI`, `BAND_CENTI`, `BAND_DECI`, and `BAND_AUX`.
 
 #### us915, au921, nz915
 
