@@ -33,16 +33,8 @@
 # include "lmic.h"
 #endif
 
-#if defined(CFG_eu868)
-# include "lmic_bandplan_eu868.h"
-#elif defined(CFG_us915)
-# include "lmic_bandplan_us915.h"
-#elif defined(CFG_au921)
+#if defined(CFG_au921)
 # include "lmic_bandplan_au921.h"
-#elif defined(CFG_as923)
-# include "lmic_bandplan_as923.h"
-#elif defined(CFG_in866)
-# include "lmic_bandplan_in866.h"
 #else
 # error "CFG_... not properly set for bandplan"
 #endif

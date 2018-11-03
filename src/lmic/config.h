@@ -20,7 +20,7 @@
 
 // make sure that we have exactly one target region defined.
 #if CFG_LMIC_REGION_MASK == 0
-# define CFG_eu868 1
+# define CFG_au921 1
 #elif (CFG_LMIC_REGION_MASK & (-CFG_LMIC_REGION_MASK)) != CFG_LMIC_REGION_MASK
 # error You can define at most one of CFG_... variables
 #elif (CFG_LMIC_REGION_MASK & LMIC_REGIONS_SUPPORTED) == 0
@@ -33,8 +33,8 @@
 #endif
 
 // if the country code is Japan, then the region must be AS923
-#if LMIC_COUNTRY_CODE == LMIC_COUNTRY_CODE_JP && CFG_region != LMIC_REGION_as923
-# error "If country code is JP, then region must be AS923"
+#if LMIC_COUNTRY_CODE == LMIC_COUNTRY_CODE_AU && CFG_region != LMIC_REGION_au921
+# error "If country code is AU, then region must be au921"
 #endif
 
 // check for internal consistency

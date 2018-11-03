@@ -62,15 +62,8 @@ Revision history:
 #define CFG_TEXT_2(x)	#x
 
 // constants for comparison
-#define LMIC_REGION_eu868    1
-#define LMIC_REGION_us915    2
-#define LMIC_REGION_cn783    3
-#define LMIC_REGION_eu433    4
 #define LMIC_REGION_au921    5
-#define LMIC_REGION_cn490    6
-#define LMIC_REGION_as923    7
-#define LMIC_REGION_kr921    8
-#define LMIC_REGION_in866    9
+
 
 // Some regions have country-specific overrides. For generality, we specify
 // country codes using the LMIC_COUNTY_CODE_C() macro These values are chosen
@@ -84,7 +77,8 @@ Revision history:
 #define LMIC_COUNTRY_CODE_NONE  0
 
 // specific countries. Only the ones that are needed by the code are defined.
-#define LMIC_COUNTRY_CODE_JP    LMIC_COUNTRY_CODE_C('J', 'P')
+//#define LMIC_COUNTRY_CODE_JP    LMIC_COUNTRY_CODE_C('J', 'P')
+#define LMIC_COUNTRY_CODE_NZ    LMIC_COUNTRY_CODE_C('A', 'U')
 
 // include the file that the user is really supposed to edit. But for really strange
 // ports, this can be suppressed
@@ -96,15 +90,7 @@ Revision history:
 // TODO(tmm@mcci.com) consider moving this block to a central file as it's not
 // user-editable.
 #define LMIC_REGIONS_SUPPORTED  (                               \
-                                (1 << LMIC_REGION_eu868) |      \
-                                (1 << LMIC_REGION_us915) |      \
-                             /* (1 << LMIC_REGION_cn783) | */   \
-                             /* (1 << LMIC_REGION_eu433) | */   \
                                 (1 << LMIC_REGION_au921) |      \
-                             /* (1 << LMIC_REGION_cn490) | */   \
-                                (1 << LMIC_REGION_as923) |      \
-                             /* (1 << LMIC_REGION_kr921) | */   \
-                                (1 << LMIC_REGION_in866) |      \
                                 0)
 
 //
@@ -114,63 +100,21 @@ Revision history:
 // below are supported yet.
 //
 # define CFG_LMIC_REGION_MASK   \
-                        ((defined(CFG_eu868) << LMIC_REGION_eu868) | \
-                         (defined(CFG_us915) << LMIC_REGION_us915) | \
-                         (defined(CFG_cn783) << LMIC_REGION_cn783) | \
-                         (defined(CFG_eu433) << LMIC_REGION_eu433) | \
-                         (defined(CFG_au921) << LMIC_REGION_au921) | \
-                         (defined(CFG_cn490) << LMIC_REGION_cn490) | \
-                         (defined(CFG_as923) << LMIC_REGION_as923) | \
-                         (defined(CFG_kr921) << LMIC_REGION_kr921) | \
-                         (defined(CFG_in866) << LMIC_REGION_in866) | \
+                        ((defined(CFG_au921) << LMIC_REGION_au921) | \
                          0)
 
 // the selected region.
-#if defined(CFG_eu868)
-# define CFG_region     LMIC_REGION_eu868
-#elif defined(CFG_us915)
-# define CFG_region     LMIC_REGION_us915
-#elif defined(CFG_cn783)
-# define CFG_region     LMIC_REGION_cn783
-#elif defined(CFG_eu433)
-# define CFG_region     LMIC_REGION_eu433
-#elif defined(CFG_au921)
+#if defined(CFG_au921)
 # define CFG_region     LMIC_REGION_au921
-#elif defined(CFG_cn490)
-# define CFG_region     LMIC_REGION_cn490
-#elif defined(CFG_as923)
-# define CFG_region     LMIC_REGION_as923
-#elif defined(CFG_kr921)
-# define CFG_region     LMIC_REGION_kr921
-#elif defined(CFG_in866)
-# define CFG_region     LMIC_REGION_in866
-#else
-# define CFG_region     0
 #endif
 
 // finally the mask of` US-like and EU-like regions
 #define CFG_LMIC_EU_like_MASK   (                               \
-                                (1 << LMIC_REGION_eu868) |      \
-                             /* (1 << LMIC_REGION_us915) | */   \
-                                (1 << LMIC_REGION_cn783) |      \
-                                (1 << LMIC_REGION_eu433) |      \
                              /* (1 << LMIC_REGION_au921) | */   \
-                             /* (1 << LMIC_REGION_cn490) | */   \
-                                (1 << LMIC_REGION_as923) |      \
-                                (1 << LMIC_REGION_kr921) |      \
-                                (1 << LMIC_REGION_in866) |      \
                                 0)
 
 #define CFG_LMIC_US_like_MASK   (                               \
-                             /* (1 << LMIC_REGION_eu868) | */   \
-                                (1 << LMIC_REGION_us915) |      \
-                             /* (1 << LMIC_REGION_cn783) | */   \
-                             /* (1 << LMIC_REGION_eu433) | */   \
                                 (1 << LMIC_REGION_au921) |      \
-                             /* (1 << LMIC_REGION_cn490) | */   \
-                             /* (1 << LMIC_REGION_as923) | */   \
-                             /* (1 << LMIC_REGION_kr921) | */   \
-                             /* (1 << LMIC_REGION_in866) | */   \
                                 0)
 
 #define CFG_LMIC_EU_like        (!!(CFG_LMIC_REGION_MASK & CFG_LMIC_EU_like_MASK))

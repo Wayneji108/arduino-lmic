@@ -32,7 +32,7 @@ requires C99 mode to be enabled by default.
 - [Configuration](#configuration)
 	- [Selecting the LoRaWAN Region Configuration](#selecting-the-lorawan-region-configuration)
 		- [eu868, as923, in866](#eu868-as923-in866)
-		- [us915, au921](#us915-au921)
+		- [us915, au921, nz915](#us915-au921)
 	- [Selecting the target radio transceiver](#selecting-the-target-radio-transceiver)
 	- [Controlling use of interrupts](#controlling-use-of-interrupts)
 	- [Disabling PING](#disabling-ping)
@@ -137,6 +137,7 @@ The library supports the following regions:
 `-D CFG_au921` | `LMIC_REGION_au921` | 5 | 2.5 | Australia 915-928 MHz ISM
 `-D CFG_as923` | `LMIC_REGION_as923` | 7 | 2.7 | Asia 923 MHz ISM
 `-D CFG_in866` | `LMIC_REGION_in866` | 9 | 2.9 | India 865-867 MHz ISM
+`-D CFG_nz915` | `LMIC_REGION_nz915` | 10| ?.? | New Zealand 915-928 MHz ISM
 
 You should define exactly one of `CFG_...` variables. If you don't,
 the library assumes `CFG_eu868`. The library changes configuration pretty substantially
@@ -150,7 +151,7 @@ the following changes:
 - Add the constants `MAX_CHANNELS`, `MAX_BANDS`, `LIMIT_CHANNELS`, `BAND_MILLI`,
 `BAND_CENTI`, `BAND_DECI`, and `BAND_AUX`.
 
-#### us915, au921
+#### us915, au921, nz915
 
 If the library is configured for US915 operation, we make the following changes:
 - Add the APIs `LMIC_enableChannel()`,

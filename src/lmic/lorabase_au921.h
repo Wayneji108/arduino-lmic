@@ -62,7 +62,8 @@ enum _dr_as921_t {
 
 // Default frequency plan for AU 921MHz
 enum {
-        AU921_125kHz_UPFBASE = 915200000,
+        //AU921_125kHz_UPFBASE = 915200000,
+		AU921_125kHz_UPFBASE = 916800000,
         AU921_125kHz_UPFSTEP = 200000,
         AU921_500kHz_UPFBASE = 915900000,
         AU921_500kHz_UPFSTEP = 1600000,
@@ -71,7 +72,7 @@ enum {
 };
 enum {
         AU921_FREQ_MIN = 915000000,
-        AU921_FREQ_MAX = 928000000
+        AU921_FREQ_MAX = 920000000
 };
 enum {
         AU921_TX_EIRP_MAX_DBM = 30      // 30 dBm

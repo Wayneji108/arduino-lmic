@@ -47,7 +47,7 @@
 
 // if LMIC_DEBUG_PRINTF is now defined, just use it. This lets you do anything
 // you like with a sufficiently crazy header file.
-#if LMIC_DEBUG_LEVEL > 0
+#if LMIC_DEBUG_LEVEL > 2
 # ifndef LMIC_DEBUG_PRINTF
 //  otherwise, check whether someone configured a print-function to be used,
 //  and use it if so.
@@ -370,13 +370,14 @@ DECLARE_LMIC; //!< \internal
 
 //! Construct a bit map of allowed datarates from drlo to drhi (both included).
 #define DR_RANGE_MAP(drlo,drhi) (((u2_t)0xFFFF<<(drlo)) & ((u2_t)0xFFFF>>(15-(drhi))))
-bit_t LMIC_setupBand (u1_t bandidx, s1_t txpow, u2_t txcap);
-bit_t LMIC_setupChannel (u1_t channel, u4_t freq, u2_t drmap, s1_t band);
+bit_t LMIC_setupBand(u1_t bandidx, s1_t txpow, u2_t txcap);
+bit_t LMIC_setupChannel(u1_t channel, u4_t freq, u2_t drmap, s1_t band);
 void  LMIC_disableChannel (u1_t channel);
 void  LMIC_enableSubBand(u1_t band);
 void  LMIC_enableChannel(u1_t channel);
 void  LMIC_disableSubBand(u1_t band);
 void  LMIC_selectSubBand(u1_t band);
+void  LMIC_selectChannels();
 
 void  LMIC_setDrTxpow   (dr_t dr, s1_t txpow);  // set default/start DR/txpow
 void  LMIC_setAdrMode   (bit_t enabled);        // set ADR mode (if mobile turn off)
